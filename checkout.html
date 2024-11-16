@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Für Reddit Community - Checkout</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.23);
+            padding: 1rem 0;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: orangered;
+            text-align: center;
+        }
+        .logo1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 8px;
+            text-align: center;
+        }
+
+        /* Checkout styles */
+        .checkout-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .checkout-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .step.active {
+            border: 1.3px solid balck;
+            background: #1a284f;
+            padding: 8px;
+            color: #ffffff;
+        }
+        .checkout-form {
+            display: none;
+        }
+        .checkout-form.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #253c7b;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #d1d2d3;
+            color: #000000;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .checkout-steps {
+                flex-direction: column;
+            }
+            .step {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Für Reddit Community</div><div class="logo1" > Checkout</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="checkout-container">
+            <div class="checkout-steps">
+                <div class="step active" id="step1">Versandinfo</div>
+                <div class="step" id="step2">Rechnungsinfo</div>
+                <div class="step" id="step3">Zahlungsmethode</div>
+                <div class="step" id="step4">Bestätigung</div>
+            </div>
+
+            <form id="checkoutForm">
+                <div class="checkout-form active" id="shippingForm">
+                    <h2>Versandinformationen</h2>
+                    <div class="form-group">
+                        <label for="shippingName">Name</label>
+                        <input type="text" id="shippingName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shippingAddress">Adresse</label>
+                        <input type="text" id="shippingAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shippingCity">Stadt</label>
+                        <input type="text" id="shippingCity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shippingZip">PLZ</label>
+                        <input type="text" id="shippingZip" required>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn" id="shippingNext">Weiter</button>
+                    </div>
+                </div>
+
+                <div class="checkout-form" id="billingForm">
+                    <h2>Rechnungsinformationen</h2>
+                    <div class="form-group">
+                        <label for="billingName">Name</label>
+                        <input type="text" id="billingName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="billingAddress">Adresse</label>
+                        <input type="text" id="billingAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="billingCity">Stadt</label>
+                        <input type="text" id="billingCity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="billingZip">PLZ</label>
+                        <input type="text" id="billingZip" required>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn" id="billingPrev">Zurück</button>
+                        <button type="button" class="btn" id="billingNext">Weiter</button>
+                    </div>
+                </div>
+
+                <div class="checkout-form" id="paymentForm">
+                    <h2>Zahlungsmethode</h2>
+                    <div class="form-group">
+                        <label for="paymentMethod">Zahlungsmethode auswählen</label>
+                        <select id="paymentMethod" required>
+                            <option value="">Bitte wählen</option>
+                            <option value="credit_card">Kreditkarte</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="bank_transfer">Überweisung</option>
+                        </select>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn" id="paymentPrev">Zurück</button>
+                        <button type="button" class="btn" id="paymentNext">Weiter</button>
+                    </div>
+                </div>
+
+                <div class="checkout-form" id="confirmationForm">
+                    <h2>Überprüfung und Bestätigung</h2>
+                    <div id="orderSummary"></div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="termsAccepted" required>
+                            Ich akzeptiere die AGB und die Zahlungsverpflichtung
+                        </label>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn" id="confirmationPrev">Zurück</button>
+                        <button type="submit" class="btn" id="placeOrder">Bestellung abschließen</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 für Reddit Community (r/drogen). Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        const checkoutForm = document.getElementById('checkoutForm');
+        const steps = ['shippingForm', 'billingForm', 'paymentForm', 'confirmationForm'];
+        let currentStep = 0;
+
+        function showStep(stepIndex) {
+            steps.forEach((step, index) => {
+                const formElement = document.getElementById(step);
+                const stepElement = document.getElementById(`step${index + 1}`);
+                if (index === stepIndex) {
+                    formElement.classList.add('active');
+                    stepElement.classList.add('active');
+                } else {
+                    formElement.classList.remove('active');
+                    stepElement.classList.remove('active');
+                }
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        document.getElementById('shippingNext').addEventListener('click', nextStep);
+        document.getElementById('billingPrev').addEventListener('click', prevStep);
+        document.getElementById('billingNext').addEventListener('click', nextStep);
+        document.getElementById('paymentPrev').addEventListener('click', prevStep);
+        document.getElementById('paymentNext').addEventListener('click', nextStep);
+        document.getElementById('confirmationPrev').addEventListener('click', prevStep);
+
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (document.getElementById('termsAccepted').checked) {
+                alert('Vielen Dank für Ihre Bestellung!');
+                // Here you would typically send the order data to a server
+            } else {
+                alert('Bitte akzeptieren Sie die AGB und die Zahlungsverpflichtung.');
+            }
+        });
+
+        // Update order summary on the confirmation page
+        function updateOrderSummary() {
+            const summary = document.getElementById('orderSummary');
+            summary.innerHTML = `
+                <h3>Bestellübersicht</h3>
+                <p><strong>Versandadresse:</strong> ${document.getElementById('shippingAddress').value}, ${document.getElementById('shippingCity').value}, ${document.getElementById('shippingZip').value}</p>
+                <p><strong>Rechnungsadresse:</strong> ${document.getElementById('billingAddress').value}, ${document.getElementById('billingCity').value}, ${document.getElementById('billingZip').value}</p>
+                <p><strong>Zahlungsmethode:</strong> ${document.getElementById('paymentMethod').value}</p>
+            `;
+        }
+
+        document.getElementById('paymentNext').addEventListener('click', updateOrderSummary);
+    </script>
+</body>
+</html>
