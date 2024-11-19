@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produktbestellung</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #1a1a1b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ffffff;
+            color: rgb(255, 85, 0);
+            box-shadow: 0 2px 4px 0 rgba(51, 51, 51, 0.294);
+            padding: 15px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.5em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 2px solid grey;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .menu {
+            display: none;
+            background-color: #ff4500;
+            color: white;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            transition: 0.3s ease-in-out;
+        }
+
+        .menu ul {
+            list-style: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .menu ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .container {
+            margin-top: 80px;
+            width: 100%;
+            max-width: 800px;
+            
+        }
+
+        .product {
+            
+            background-color: white;
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.25);
+            padding: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: box-shadow 0.3s;
+            flex-direction: column;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .productx{
+            border: 1px solid black;
+            border-radius: 6px;
+            padding: 25px;
+        }
+
+        .product p{
+            margin-top: 6px;
+           
+        }
+
+        .product:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product img {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        .order-form {
+            display: none;
+            background-color: white;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            margin-top: 20px;
+        }
+
+        form section {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid grey;
+        }
+
+        form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        form input, form select, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #959393;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+      
+
+        button {
+            background-color: #152143;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background-color: #0d0805;
+            box-shadow: 0 8px 32px 0 rgba(18, 13, 13, 0.25);
+        }
+
+        h2{
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 1px solid gray;
+            padding-bottom: 16px;
+        }
+        h4{
+margin-bottom: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <strong> Pulver Gadget (r/drogen) </strong>
+        <div></div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Produkte</a></li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <div class="product" onclick="showForm()">
+            <div class="productx">
+            <img src="produktbild.jpg" alt="Produktbild">
+            <p>★ ★ ★ ★ ★</p>
+            <h3>Pulver-Gadget </h3>
+            <p>Selbst Designtes Pulver Gadget </p>
+        </div>
+        </div>
+
+        <div class="order-form" id="order-form">
+            <h2>Bestellformular</h2>
+            <form>
+                <!-- Versandadresse -->
+                <section>
+                    <h4>Versandadresse</h4>
+
+                    <label for="versand-name">Name:</label>
+                    <input type="text" id="versand-name" name="versand-name" placeholder="Vor und Nachname..." required>
+
+                    <label for="versand-strasse">Straße:</label>
+                    <input type="text" id="versand-strasse" name="versand-strasse" placeholder="Straße und Huasnummer..." required>
+
+                    <label for="versand-ort">Ort:</label>
+                    <input type="text" id="versand-ort" name="versand-ort" placeholder="Ort..." required>
+
+                    <label for="versand-plz">PLZ:</label>
+                    <input type="text" id="versand-plz" name="versand-plz" placeholder="Postleitzahl..." required>
+                </section>
+
+                <!-- Rechnungsadresse -->
+                <section>
+                    <h4>Rechnungsadresse</h4>
+                    <label>
+                        <input type="checkbox" id="gleiche-adresse" onclick="copyAddress()"> Gleiche wie Versandadresse
+                    </label>
+
+                    <label for="rechnung-name">Name:</label>
+                    <input type="text" id="rechnung-name" name="rechnung-name" placeholder="Vor und Nachname..." >
+
+                    <label for="rechnung-strasse">Straße:</label>
+                    <input type="text" id="rechnung-strasse" name="rechnung-strasse" placeholder="Straße und Hausnummer..." >
+
+                    <label for="rechnung-ort">Ort:</label>
+                    <input type="text" id="rechnung-ort" name="rechnung-ort" placeholder="Ort...">
+
+                    <label for="rechnung-plz">PLZ:</label>
+                    <input type="text" id="rechnung-plz" name="rechnung-plz" placeholder="Postleitzahl...">
+                </section>
+
+                <!-- Zahlungsmethode -->
+                <section>
+                    <h4>Zahlungsmethode</h4>
+                    <label for="zahlungsmethode">Wählen Sie eine Zahlungsmethode:</label>
+                    <select id="zahlungsmethode" name="zahlungsmethode">
+                        <option value="kreditkarte">Kreditkarte</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="banküberweisung">Banküberweisung</option>
+                    </select>
+                </section>
+
+                <!-- Bestätigung -->
+                <section>
+                    <h3>Bestätigung</h3>
+                    <label for="agb">
+                        <input type="checkbox" id="agb" name="agb" required> Ich akzeptiere die AGB
+                    </label>
+                </section>
+
+                <button type="submit">Bestellung abschließen</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showForm() {
+            document.getElementById('order-form').style.display = 'block';
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function copyAddress() {
+            const checkbox = document.getElementById('gleiche-adresse');
+            if (checkbox.checked) {
+                document.getElementById('rechnung-name').value = document.getElementById('versand-name').value;
+                document.getElementById('rechnung-strasse').value = document.getElementById('versand-strasse').value;
+                document.getElementById('rechnung-ort').value = document.getElementById('versand-ort').value;
+                document.getElementById('rechnung-plz').value = document.getElementById('versand-plz').value;
+            } else {
+                document.getElementById('rechnung-name').value = '';
+                document.getElementById('rechnung-strasse').value = '';
+                document.getElementById('rechnung-ort').value = '';
+                document.getElementById('rechnung-plz').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
+
