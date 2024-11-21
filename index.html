@@ -24,18 +24,25 @@
         header {
             background-color: #ffffff;
             color: rgb(0, 0, 0);
-            box-shadow: 0 2px 4px 0 rgba(51, 51, 51, 0.294);
+            
             padding: 15px 20px;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1.5em;
+            font-size: 1.2em;
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
-            border-bottom: 2px solid grey;
+            border-bottom: 2.15px solid grey;
+        }
+
+        .logoimg{
+            height: 40px;
+            
+            margin-left: 16px;
+            right: 6px;
         }
 
         .menu-icon {
@@ -96,9 +103,9 @@
         }
 
         .productx {
-            border: 1px solid black;
+            border: 1.5px solid black;
             border-radius: 6px;
-            padding: 25px;
+            padding: 20px;
         }
 
         .product p {
@@ -110,7 +117,8 @@
         }
 
         .product img {
-            width: 260px;
+            border-top: 1px solid grey;
+            width: 240px;
             height: auto;
             border-bottom: 1px solid grey;
             border-radius: 2px;
@@ -290,7 +298,7 @@
     <header>
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
         <strong>Pulver Gadget (r/drogen)</strong>
-        <div></div>
+        <div class="logo" > <img class="logoimg" src="image.png"</div>
     </header>
 
     <nav class="menu" id="menu">
