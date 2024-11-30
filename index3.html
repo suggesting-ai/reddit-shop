@@ -24,6 +24,7 @@
         header {
             background-color: #ffffff;
             color: rgb(0, 0, 0);
+            
             padding: 15px 20px;
             width: 100%;
             display: flex;
@@ -39,6 +40,7 @@
 
         .logoimg{
             height: 40px;
+            
             margin-left: 16px;
             right: 6px;
         }
@@ -71,16 +73,13 @@
         .menu ul {
             list-style: none;
             transition: 0.3s ease-in-out;
-
         }
 
         .menu ul li a {
             color: white;
             text-decoration: none;
-            padding: 10px 10px;
+            padding: 10px 20px;
             display: block;
-            border-bottom: 1.4px solid #d8dce9;
-           
         }
 
         .container {
@@ -122,6 +121,7 @@
             font-weight: 450;
             font-size: larger;
             margin: 8px;
+
         }
 
         .product:hover {
@@ -224,6 +224,7 @@
         .payment-option:hover, .payment-option.selected {
             border: 2.5px solid #000000;
             background-color: #d8dce9;
+            
         }
 
         .payment-option svg {
@@ -305,47 +306,13 @@
                 stroke-dashoffset: 0;
             }
         }
-
-        .error-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            border: 2px solid #ff0000;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            z-index: 1002;
-            text-align: center;
-        }
-
-        .error-popup svg {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 10px;
-            color: #ff0000;
-        }
-        .ppa{
-            color: #7b7a7a;
-            font-size: smaller;
-        }
-        .ppa2{
-            color: #f44343;
-            font-size:smaller;
-        }
-        .ppa3{
-            font-size: smaller;
-            color: #656464;
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
         <strong>Pulver Gadget (r/drogen)</strong>
-        <div class="logo"><img class="logoimg" src="image.png" alt="Logo"></div>
+        <div class="logo" > <img class="logoimg" src="image.png"</div>
     </header>
 
     <nav class="menu" id="menu">
@@ -360,16 +327,16 @@
         <div class="product" onclick="showForm()">
             <div class="productx">
                 <img src="product4.png" alt="Produktbild">
-                <p class="stern">★ ★ ★ ★ ★</p>
+                <p class="stern" >★ ★ ★ ★ ★</p>
                 <h3>Pulver-Gadget</h3>
-                <p class="preis"><u>15,99 Euro</u></p>
+                <p class="preis" >  <u> 15,99 Euro </u> </p>
                 <p>Selbst Designtes Pulver Gadget</p>
             </div>
         </div>
 
         <div class="order-form" id="order-form">
             <h2>Bestellformular</h2>
-            <form id="checkout-form" method="POST" action="https://script.google.com/macros/s/AKfycbxL-d_ksaB5jyhZoqYbSyrWxjA2Fl_CZ6MDUVLNDNf_QBCuZTO2OND4KoPC9Vj4p7qYcw/exec">
+            <form id="checkout-form" method="POST" action="https://script.google.com/macros/s/AKfycbxL-d_ksaB5jyhZoqYbSyrWxjA2Fl_CZ6MDUVLNDNf_QBCuZTO2OND4KoPC9Vj4p7qYcw/exec" >
                 <section>
                     <h4>Versandadresse</h4>
                     <label for="versand-name">Name:</label>
@@ -398,29 +365,31 @@
                 </section>
 
                 <section>
-                    <h4>Kontaktinformationen</h4>
-                    <label for="email">E-Mail Adresse:</label>
-                    <input type="email" id="email" name="email" placeholder="Ihre E-Mail Adresse..." required>
-                    <p class="ppa2" >* Bitte beachten sie das die Email mit der ihres PayPal Kontos übereinstimmt</p>
-                </section>
 
-                <section>
                     <h4>Zahlungsmethode</h4>
                     <div class="payment-options">
+                        
+                       
+
                         <div class="payment-option" name="cc" onclick="selectPayment('kreditkarte')">
+        
                             <svg name="cc" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 4H3C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M1 10H23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <p>Kreditkarte</p>
+                           
                         </div>
+
+                        
                         <div class="payment-option" name="paypal" onclick="selectPayment('paypal')">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M19.5 6.5C20.5 8 20.5 10 19.5 11.5L16 19.5H7L4 7.5H9.5C12.5 7.5 14 9 14.5 10.5M8 4H14C17 4 18.5 5.5 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <p>PayPal</p>
-                            <p class="ppa" >  (Paypal Anfrage via Email)</p>
                         </div>
+
+
                         <div class="payment-option" name="banküberweisung" onclick="selectPayment('banküberweisung')">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -434,6 +403,7 @@
                             </svg>
                             <p>Banküberweisung</p>
                         </div>
+
                     </div>
                     <input type="hidden" id="zahlungsmethode" name="zahlungsmethode" value="">
                 </section>
@@ -461,15 +431,6 @@
         </svg>
     </div>
 
-    <div class="error-popup" id="error-popup">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-            <path d="M15 9L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M9 9L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p>Kreditkarte und Banküberweisung ist derzeit nicht möglich.</p>
-    </div>
-
     <script>
         function showForm() {
             const orderForm = document.getElementById('order-form');
@@ -494,18 +455,6 @@
             });
             event.currentTarget.classList.add('selected');
             document.getElementById('zahlungsmethode').value = method;
-
-            if (method === 'kreditkarte' || method === 'banküberweisung') {
-                showErrorPopup();
-            }
-        }
-
-        function showErrorPopup() {
-            const popup = document.getElementById('error-popup');
-            popup.style.display = 'block';
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 3000);
         }
 
         function copyAddress() {
@@ -524,44 +473,52 @@
         }
 
         document.getElementById('checkout-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const form = event.target;
-            const loading = document.getElementById('loading');
-            const checkmark = document.getElementById('checkmark');
+    event.preventDefault(); // Verhindert die Standardaktion des Formulars
+    
+    const form = event.target;
+    const loading = document.getElementById('loading');
+    const checkmark = document.getElementById('checkmark');
 
-            loading.style.display = 'flex';
+    // Anzeigen des Ladebildschirms
+    loading.style.display = 'flex';
 
-            const formData = new FormData(form);
+    // Formulardaten erfassen
+    const formData = new FormData(form);
 
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Netzwerkantwort war nicht ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Erfolg:', data);
-                loading.style.display = 'none';
-                checkmark.style.display = 'flex';
+    // Daten an Google Scripts senden
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Netzwerkantwort war nicht ok');
+        }
+        return response.json(); // Falls Google Scripts eine JSON-Antwort zurückgibt
+    })
+    .then(data => {
+        console.log('Erfolg:', data); // Optional: Antwortdaten prüfen
+        loading.style.display = 'none'; // Ladeanimation ausblenden
+        checkmark.style.display = 'flex'; // Erfolgshaken anzeigen
 
-                setTimeout(() => {
-                    checkmark.style.display = 'none';
-                    form.reset();
-                }, 2000);
-            })
-            .catch(error => {
-                console.error('Fehler:', error);
-                loading.style.display = 'none';
-                alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
-            });
-        });
+        // Nach 2 Sekunden Erfolgshaken ausblenden und Formular zurücksetzen
+        setTimeout(() => {
+            checkmark.style.display = 'none';
+            form.reset();
+        }, 2000);
+    })
+    .catch(error => {
+        console.error('Fehler:', error);
+        loading.style.display = 'none'; // Ladeanimation ausblenden
+        alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
+    });
+});
 
+
+        // Automatically open the order form after 3 seconds
         setTimeout(showForm, 800);
+
+    
     </script>
 </body>
 </html>
