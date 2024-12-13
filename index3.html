@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produktbestellung</title>
+    <title>Moderner Online Shop</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #ffffff;
+            background-color: #f5f5f7;
             color: #1a1a1b;
             display: flex;
             flex-direction: column;
@@ -23,8 +23,7 @@
 
         header {
             background-color: #ffffff;
-            color: rgb(0, 0, 0);
-            
+            color: #000000;
             padding: 15px 20px;
             width: 100%;
             display: flex;
@@ -35,51 +34,57 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            border-bottom: 2.15px solid grey;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .logoimg{
+        .logoimg {
             height: 40px;
-            
             margin-left: 16px;
-            right: 6px;
         }
 
         .menu-icon {
             font-size: 24px;
             cursor: pointer;
+            z-index: 1002;
+            transition: transform 0.3s ease;
         }
 
-        .menu {
-            display: none;
-            background-color: #ff4500;
-            color: white;
-            position: absolute;
-            top: 60px;
+        .menu-icon.active {
+            transform: rotate(90deg);
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+            z-index: 1001;
+            padding-top: 60px;
+        }
+
+        .side-menu.active {
             left: 0;
-            width: 100%;
-            text-align: center;
-            padding: 10px 0;
-            transition: 0.3s ease-in-out;
-            opacity: 0;
-            transform: translateY(-20px);
         }
 
-        .menu.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .menu ul {
+        .side-menu ul {
             list-style: none;
-            transition: 0.3s ease-in-out;
         }
 
-        .menu ul li a {
-            color: white;
+        .side-menu ul li a {
+            color: #333;
             text-decoration: none;
-            padding: 10px 20px;
+            padding: 15px 20px;
             display: block;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        .side-menu ul li a:hover {
+            background-color: #f5f5f7;
         }
 
         .container {
@@ -90,22 +95,48 @@
 
         .product {
             background-color: white;
-            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.25);
+            box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             cursor: pointer;
-            transition: box-shadow 0.3s;
-            flex-direction: column;
-            text-align: center;
-            margin-top: 6px;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
-        .productx {
-            border: 1.3px solid rgb(35, 35, 35);
-            border-radius: 4px;
-            padding: 20px;
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            flex: 0 0 40%;
+            margin-right: 20px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .stern {
+            color: #ffc107;
+            margin-bottom: 5px;
+        }
+
+        .preis {
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #4a4a4a;
         }
 
         .product p {
@@ -113,15 +144,15 @@
         }
 
         .stern {
-            color: #31458e;
+            color: #ffc107;
         }
 
         .preis{
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: 450;
-            font-size: larger;
-            margin: 8px;
-
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #4a4a4a;
         }
 
         .product:hover {
@@ -224,7 +255,6 @@
         .payment-option:hover, .payment-option.selected {
             border: 2.5px solid #000000;
             background-color: #d8dce9;
-            
         }
 
         .payment-option svg {
@@ -281,62 +311,112 @@
             width: 100%;
             height: 100%;
             background-color: rgba(255, 255, 255, 0.8);
+            color: #1a1c48;
             z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
-        .checkmark__circle {
-            stroke-dasharray: 166;
-            stroke-dashoffset: 166;
-            stroke-width: 2;
-            stroke-miterlimit: 10;
-            stroke: #1a1c48;
-            fill: none;
-            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        .checkmark.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .checkmark__check {
-            transform-origin: 50% 50%;
-            stroke-dasharray: 48;
-            stroke-dashoffset: 48;
-            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        .checkmark svg {
+            width: 100px;
+            height: 100px;
+            transform: scale(0);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes stroke {
-            100% {
-                stroke-dashoffset: 0;
-            }
+        .checkmark.active svg {
+            transform: scale(1);
+        }
+
+        .error-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background-color: #fff;
+            border: 2px solid #212844;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            z-index: 1002;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .error-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .error-popup svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            color: #ff0000;
+        }
+
+        .ppa{
+            color: #7b7a7a;
+            font-size: smaller;
+        }
+        .ppa2{
+            color: #f44343;
+            font-size:smaller;
+        }
+        .ppa3{
+            font-size: smaller;
+            color: #656464;
         }
     </style>
 </head>
 <body>
     <header>
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <strong>Pulver Gadget (r/drogen)</strong>
-        <div class="logo" > <img class="logoimg" src="image.png"</div>
+        <strong>Moderner Online Shop</strong>
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="27" height="27" viewBox="0 0 50 50">
+            <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z"></path>
+            </svg>
+        <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="27" height="27" viewBox="0 0 50 50">
+            <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z"></path>
+            </svg><img class="logoimg" src="image.png" alt="Logo"></div>
+
     </header>
 
-    <nav class="menu" id="menu">
+
+    <nav class="side-menu" id="side-menu">
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">Produkte</a></li>
+            <li><a href="#">Über uns</a></li>
             <li><a href="#">Kontakt</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="product" onclick="showForm()">
-            <div class="productx">
-                <img src="product4.png" alt="Produktbild">
-                <p class="stern" >★ ★ ★ ★ ★</p>
+            <div class="product-image">
+                <img src="Photoroom-20241201_133820.png" alt="Produktbild">
+            </div>
+            <div class="product-info">
+                <p class="stern">★ ★ ★ ★ ★</p>
                 <h3>Pulver-Gadget</h3>
-                <p class="preis" >  <u> 15,99 Euro </u> </p>
-                <p>Selbst Designtes Pulver Gadget</p>
+                <p class="preis">15,99 €</p>
+                <p>Selbst designtes Pulver-Gadget mit einzigartigen Funktionen</p>
             </div>
         </div>
 
         <div class="order-form" id="order-form">
             <h2>Bestellformular</h2>
-            <form id="checkout-form" method="POST" action="https://script.google.com/macros/s/AKfycbxL-d_ksaB5jyhZoqYbSyrWxjA2Fl_CZ6MDUVLNDNf_QBCuZTO2OND4KoPC9Vj4p7qYcw/exec" >
+            <form id="checkout-form" method="POST" action="https://script.google.com/macros/s/AKfycbxL-d_ksaB5jyhZoqYbSyrWxjA2Fl_CZ6MDUVLNDNf_QBCuZTO2OND4KoPC9Vj4p7qYcw/exec">
                 <section>
                     <h4>Versandadresse</h4>
                     <label for="versand-name">Name:</label>
@@ -365,31 +445,29 @@
                 </section>
 
                 <section>
+                    <h4>Kontaktinformationen</h4>
+                    <label for="email">E-Mail Adresse:</label>
+                    <input type="email" id="email" name="email" placeholder="Ihre E-Mail Adresse..." required>
+                    <p class="ppa2" >* Bitte beachten Sie, dass die E-Mail mit der Ihres PayPal-Kontos übereinstimmen muss</p>
+                </section>
 
+                <section>
                     <h4>Zahlungsmethode</h4>
                     <div class="payment-options">
-                        
-                       
-
                         <div class="payment-option" name="cc" onclick="selectPayment('kreditkarte')">
-        
                             <svg name="cc" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M21 4H3C1.89543 4 1 4.89543 1 6V18C1 19.1046 1.89543 20 3 20H21C22.1046 20 23 19.1046 23 18V6C23 4.89543 22.1046 4 21 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M1 10H23" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <p>Kreditkarte</p>
-                           
                         </div>
-
-                        
                         <div class="payment-option" name="paypal" onclick="selectPayment('paypal')">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M19.5 6.5C20.5 8 20.5 10 19.5 11.5L16 19.5H7L4 7.5H9.5C12.5 7.5 14 9 14.5 10.5M8 4H14C17 4 18.5 5.5 19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <p>PayPal</p>
+                            <p class="ppa" >  (PayPal-Anfrage via E-Mail)</p>
                         </div>
-
-
                         <div class="payment-option" name="banküberweisung" onclick="selectPayment('banküberweisung')">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -403,7 +481,6 @@
                             </svg>
                             <p>Banküberweisung</p>
                         </div>
-
                     </div>
                     <input type="hidden" id="zahlungsmethode" name="zahlungsmethode" value="">
                 </section>
@@ -425,10 +502,18 @@
     </div>
 
     <div class="checkmark" id="checkmark">
-        <svg class="checkmark__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        <svg width="340px" height="340px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.9647 14.9617L17.4693 7.44735L18.5307 8.50732L9.96538 17.0837L5.46967 12.588L6.53033 11.5273L9.9647 14.9617Z" fill="#1F2328"/>
         </svg>
+    </div>
+
+    <div class="error-popup" id="error-popup">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+            <path d="M15 9L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 9L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p>Kreditkarte und Banküberweisung sind derzeit nicht möglich.</p>
     </div>
 
     <script>
@@ -439,14 +524,10 @@
         }
 
         function toggleMenu() {
-            const menu = document.getElementById('menu');
-            if (menu.style.display === 'block') {
-                menu.classList.remove('active');
-                setTimeout(() => menu.style.display = 'none', 300);
-            } else {
-                menu.style.display = 'block';
-                setTimeout(() => menu.classList.add('active'), 10);
-            }
+            const menuIcon = document.querySelector('.menu-icon');
+            const sideMenu = document.getElementById('side-menu');
+            menuIcon.classList.toggle('active');
+            sideMenu.classList.toggle('active');
         }
 
         function selectPayment(method) {
@@ -455,6 +536,18 @@
             });
             event.currentTarget.classList.add('selected');
             document.getElementById('zahlungsmethode').value = method;
+
+            if (method === 'kreditkarte' || method === 'banküberweisung') {
+                showErrorPopup();
+            }
+        }
+
+        function showErrorPopup() {
+            const popup = document.getElementById('error-popup');
+            popup.classList.add('active');
+            setTimeout(() => {
+                popup.classList.remove('active');
+            }, 2000);
         }
 
         function copyAddress() {
@@ -473,52 +566,47 @@
         }
 
         document.getElementById('checkout-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Verhindert die Standardaktion des Formulars
-    
-    const form = event.target;
-    const loading = document.getElementById('loading');
-    const checkmark = document.getElementById('checkmark');
+            event.preventDefault();
+            
+            const form = event.target;
+            const loading = document.getElementById('loading');
+            const checkmark = document.getElementById('checkmark');
 
-    // Anzeigen des Ladebildschirms
-    loading.style.display = 'flex';
+            loading.style.display = 'flex';
 
-    // Formulardaten erfassen
-    const formData = new FormData(form);
+            const formData = new FormData(form);
 
-    // Daten an Google Scripts senden
-    fetch(form.action, {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Netzwerkantwort war nicht ok');
-        }
-        return response.json(); // Falls Google Scripts eine JSON-Antwort zurückgibt
-    })
-    .then(data => {
-        console.log('Erfolg:', data); // Optional: Antwortdaten prüfen
-        loading.style.display = 'none'; // Ladeanimation ausblenden
-        checkmark.style.display = 'flex'; // Erfolgshaken anzeigen
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Netzwerkantwort war nicht ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Erfolg:', data);
+                loading.style.display = 'none';
+                checkmark.style.display = 'flex';
+                checkmark.classList.add('active');
 
-        // Nach 2 Sekunden Erfolgshaken ausblenden und Formular zurücksetzen
-        setTimeout(() => {
-            checkmark.style.display = 'none';
-            form.reset();
-        }, 2000);
-    })
-    .catch(error => {
-        console.error('Fehler:', error);
-        loading.style.display = 'none'; // Ladeanimation ausblenden
-        alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
-    });
-});
+                setTimeout(() => {
+                    checkmark.classList.remove('active');
+                    checkmark.style.display = 'none';
+                    form.reset();
+                }, 2000);
+            })
+            .catch(error => {
+                console.error('Fehler:', error);
+                loading.style.display = 'none';
+                alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
+            });
+        });
 
-
-        // Automatically open the order form after 3 seconds
         setTimeout(showForm, 800);
-
-    
     </script>
 </body>
 </html>
+
