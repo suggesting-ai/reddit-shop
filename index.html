@@ -308,6 +308,10 @@
             transform: scale(1);
         }
 
+        .bill-option{
+            display: flex;
+        }
+
         .bill-txt{
             font-size: smaller;
         }
@@ -403,7 +407,7 @@
 
                 <section>
                     <h4>Rechnungsadresse</h4>
-                    <label>
+                    <label class="bill-option">
                         <input type="checkbox" id="gleiche-adresse" onclick="copyAddress()"> <div class="bill-txt"> Gleiche wie Versandadresse </div>
                     </label>
                     <label for="rechnung-name">Name:</label>
